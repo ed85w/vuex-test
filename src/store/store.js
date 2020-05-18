@@ -24,17 +24,20 @@ export const myStore = new Vuex.Store({
       return saleProds;
     }
   },
-  // mutations - edit the state data 
+  // mutations - edit the state data (not good for async functions such as API calls)
   mutations: {
-    // reducePriceInStore: state => {
-    //   state.products.forEach(product => {
-    //     product.price -= 1;
-    //   });
-    // }
-    reducePriceInStore: (state, amount) => {
+    reducePriceInStore: (state, payload) => {
       state.products.forEach(product => {
-        product.price -= amount;
+        product.price -= payload;
       });
+    }
+  },
+  // actions - use to 'fire' mutations (good practice)
+  actions: {
+    reducePrice: (context, payload) => {
+      setTimeout(function(){
+        context.commit('reducePriceInStore', payload)
+      },2000)
     }
   }
 })

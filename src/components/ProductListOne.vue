@@ -7,8 +7,7 @@
         <span class="price">£{{ product.price}}</span>
       </li>
     </ul>
-    <input type="number" v-model="amount">
-    <button v-on:click="reducePrice(amount)">Reduce Price</button>
+    <button v-on:click="reducePrice(4)">Reduce Price</button>
    
   </div>
 </template>
@@ -34,7 +33,7 @@ export default {
     // commit (ie call) reducePriceInStore function from store.js 
     //1st param 'reducePriceInStore' is name of function, second is the function parameter
     reducePrice: function(amount){
-      this.$store.commit('reducePriceInStore', amount)
+      this.$store.dispatch('reducePrice', amount)
     }
   }
 }
