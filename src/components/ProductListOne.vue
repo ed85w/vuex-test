@@ -13,6 +13,15 @@
 </template>
 
 <script>
+/*
+mapactions - good if you have lots of actions and getters 
+
+may need to install babel
+npm install babel-preset-stage-2
+*/
+
+import {mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   data(){
@@ -24,17 +33,25 @@ export default {
     products(){
       return this.$store.state.products
     },
-    // access getter from store
-    saleProducts(){
-      return this.$store.getters.saleProducts
-    }
+    // access getter from store (non mapped method)
+    // saleProducts(){
+    //   return this.$store.getters.saleProducts
+    // }
+    ...mapGetters([
+      'saleProducts'
+      // 'anotherGetter' 
+    ])
   },
   methods: {
     // commit (ie call) reducePriceInStore function from store.js 
     //1st param 'reducePriceInStore' is name of function, second is the function parameter
-    reducePrice: function(amount){
-      this.$store.dispatch('reducePrice', amount)
-    }
+
+    // reducePrice: function(amount){
+    //   this.$store.dispatch('reducePrice', amount)
+    // }
+    ...mapActions([
+      'reducePrice'
+    ])
   }
 }
 </script>
